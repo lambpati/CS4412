@@ -11,4 +11,4 @@ install:
   - pip install PyQt5
 # command to run tests
 script:
-  - pytest
+  - test
