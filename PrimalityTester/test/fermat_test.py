@@ -32,11 +32,11 @@ class MyTestCase(unittest.TestCase):
         # Test for small number
         self.assertEqual(fermat.fprobability(3), 0.125)
         # Test for a large number
-        self.assertEqual(fermat.fprobability(560), 1 / math.pow(2, 560))
+        self.assertEqual(fermat.fprobability(560), 1 - 1 / math.pow(2, 560))
 
     def testMProbability(self):
         # Test for small number
-        self.assertEqual(fermat.mprobability(3), 1 / 64)
+        self.assertEqual(fermat.mprobability(3), 1 - 1 / 64)
         # Test for a large number
         self.assertEqual(fermat.mprobability(128), 1 / math.pow(4, 128))
 
