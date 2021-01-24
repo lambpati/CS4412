@@ -11,11 +11,11 @@ def mod_exp(x, y, N):
     # You will need to implement this function and change the return value.
     if y == 0:
         return 1
-    z = mod_exp(x, math.floor(y / 2), N)
+    z = mod_exp(x, y // 2, N)
     if (y % 2) == 0:
-        return math.pow(z, 2) % N
+        return z ** 2 % N
     else:
-        return x * (math.pow(z, 2) % N)
+        return x * z ** 2 % N
 
 
 def fprobability(k):
@@ -31,7 +31,7 @@ def mprobability(k):
 
 
 def fermat(N, k):
-    a = []
+    b = []
     # You will need to implement this function and change the return value, which should be
     # either 'prime' or 'composite'.
     #
@@ -40,8 +40,12 @@ def fermat(N, k):
     #  hi, inclusive.
     assert (k < N), "k is greater than N!"
     for i in range(k):
-        a.append = random.randint(1, N - 1)
-    if mod_exp(a, N - 1) == 1 % N:
+        a = random.randint(1, N - 1)
+        if mod_exp(a, N - 1, N) == 1 % N:
+            b.append(1)
+        else:
+            b.append(0)
+    if all(b):
         return 'prime'
     else:
         return 'composite'
@@ -49,7 +53,7 @@ def fermat(N, k):
 
 def miller_rabin(N, k):
     y = N - 1
-    a = []
+    b = []
     # You will need to implement this function and change the return value, which should be
     # either 'prime' or 'composite'.
     #
@@ -58,10 +62,14 @@ def miller_rabin(N, k):
     #  hi, inclusive.
     assert (k < N), "k is greater than N!"
     for i in range(k):
-        a.append = random.randint(1, N - 1)
-    while y % 2 == 0:
-        y //= 2
-    if mod_exp(a, y, N) != 1 or mod_exp(a, y, N) != N-1:
-        return 'composite'
-    else:
+        a =(random.randint(1, N - 1))
+        while y % 2 == 0:
+            y //= 2
+        if mod_exp(a, N - 1, N) == 1 % N:
+            b.append(1)
+        else:
+            b.append(0)
+    if all(b):
         return 'prime'
+    else:
+        return 'composite'
