@@ -20,13 +20,13 @@ def mod_exp(x, y, N):
 
 def fprobability(k):
     # You will need to implement this function and change the return value.
-    pr = 1 / (math.pow(2, k))
+    pr = 1 - 1 / (math.pow(2, k))
     return pr
 
 
 def mprobability(k):
     # You will need to implement this function and change the return value.   
-    pr = 1 / (math.pow(4,k))
+    pr = 1 - 1 / (math.pow(4,k))
     return pr
 
 
