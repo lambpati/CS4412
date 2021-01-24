@@ -6,9 +6,14 @@ python:
   - "3.7"
   - "3.8"
   - "3.9"
+before_install:
+  - pip install -U pip
+  - pip install -U pytest
+  - pip install codecov
 # command to install dependencies
 install:
   - pip install PyQt5
-# command to run tests
-script:
-  - test
+  - pip install ".[test]" . # install package + test dependencies
+script: pytest # run tests
+after_success:
+  - codecov # submit coverage
