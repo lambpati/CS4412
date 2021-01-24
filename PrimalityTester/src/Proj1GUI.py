@@ -7,6 +7,7 @@ import sys
 # This grabs the correct version of PYQT and depends on the existence of a file called
 # "which_pyqt.py" that says which version to use.  Versions before PYQT4 are not supported.
 #
+from fermat import prime_test, fprobability, mprobability
 from which_pyqt import PYQT_VER
 if PYQT_VER == 'PYQT5':
 	from PyQt5.QtWidgets import QApplication, QWidget
