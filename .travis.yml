@@ -13,7 +13,6 @@ before_install:
 # command to install dependencies
 install:
   - pip install PyQt5
-  - pip install ".[test]" . # install package + test dependencies
 script: pytest # run tests
 after_success:
   - codecov # submit coverage
