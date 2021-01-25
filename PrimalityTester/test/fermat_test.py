@@ -25,9 +25,9 @@ class MyTestCase(unittest.TestCase):
         # Test for a known composite
         self.assertEqual(fermat.miller_rabin(10, 3), 'composite')
         # Test for a known prime
-        self.assertEqual(fermat.miller_rabin(2621, 2000), 'prime')
+        self.assertEqual(fermat.miller_rabin(2621, 10), 'prime')
         # Test for a known Carmichael number
-        self.assertEqual(fermat.miller_rabin(8910, 3000), 'composite')
+        self.assertEqual(fermat.miller_rabin(8910, 300), 'composite')
 
     def testFProbability(self):
         # Test for small number
