@@ -37,7 +37,7 @@ def fermat(N, k):
     # Fermat's test works via a randomly generated int, "a" between 2 and N
     # and checks to make sure k does not exceed N and then using mod_exp to check if a^(N-1)(mod N) = 1,
     # and returns 'prime' if its a prime number
-    # Fermat's theorem is O(n^4)
+    # Fermat's theorem is O(log^2(n))
     assert (k < N), "k is greater than N!"
     for i in range(k):  # O(n)
         a = random.randint(2, N)  # O(1)
