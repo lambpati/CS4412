@@ -74,9 +74,9 @@ class ConvexHullSolver(QObject):
 	# Checks to see if 3rd point is crossing points a and b
 	def isCrossing(self, a: QPointF, b: QPointF, c: QPointF):
 		val = (b.y() - a.y()) * (c.x() - b.x()) - (c.y() - b.y()) * (b.x() - a.x())
-		if(val == 0):
+		if (val == 0):
 			return 0
-		if(val > 0):
+		if (val > 0):
 			return 1
 		return -1
 
@@ -101,9 +101,11 @@ class ConvexHullSolver(QObject):
 		# Finding the upper tangent through given algorithm
 		while not is_done:
 			is_done = True
-			while self.isCrossing(rightHull[right_index], leftHull[left_index], leftHull[(left_index + 1) % leftSize]) >= 0:
+			while self.isCrossing(rightHull[right_index], leftHull[left_index],
+			                      leftHull[(left_index + 1) % leftSize]) >= 0:
 				left_index = (left_index + 1) % leftSize
-			while self.isCrossing(leftHull[left_index], rightHull[right_index], rightHull[(rightSize + right_index - 1) % rightSize] <= 0):
+			while self.isCrossing(leftHull[left_index], rightHull[right_index],
+			                      rightHull[(rightSize + right_index - 1) % rightSize] <= 0):
 				right_index = (rightSize + right_index - 1) % rightSize
 				is_done = False
 
@@ -116,28 +118,24 @@ class ConvexHullSolver(QObject):
 		# Finding the lower tangent through the given algorithm
 		while not is_done:
 			is_done = True
-			while self.isCrossing(leftHull[left_index], rightHull[right_index], rightHull[(right_index + 1) % rightSize]) >= 0:
+			while self.isCrossing(leftHull[left_index], rightHull[right_index],rightHull[(right_index + 1) % rightSize]) >= 0:
 				right_index = (right_index + 1) % rightSize
-			while self.isCrossing(rightHull[right_index], leftHull[left_index], leftHull[ leftSize + left_index - 1] % leftSize) <= 0:
+			while self.isCrossing(rightHull[right_index], leftHull[left_index],leftHull[leftSize + left_index - 1] % leftSize) <= 0:
 				left_index = (leftSize + left_index - 1) % leftSize
 				is_done = False
 
 		lower_L = left_index
 		lower_R = right_index
 
-
-
 	# Divides and conquers two hulls
-	def divide(self,points: [QPointF]):
-		half = len(points)//2
+	def divide(self, points: [QPointF]):
+		half = len(points) // 2
 		left = points[:half]
 		right = points[:half]
 		left_hull = self.divide(left)
 		right_hull = self.divide(right)
 
 		return self.conquer(left_hull, right_hull)
-
-
 
 	# This is the method that gets called by the GUI and actually executes
 	# the finding of the hull
@@ -146,11 +144,10 @@ class ConvexHullSolver(QObject):
 		self.view = view
 		assert (type(points) == list and type(points[0]) == QPointF)
 
-
 		t1 = time.time()
 		# TODO: SORT THE POINTS BY INCREASING X-VALUE
 		print(self.sortPoints(points))
-		points = self.sortPoints(points)
+		# points = self.sortPoints(points)
 		t2 = time.time()
 
 		t3 = time.time()
