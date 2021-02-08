@@ -129,6 +129,8 @@ class ConvexHullSolver(QObject):
 
 	# Divides and conquers two hulls
 	def divide(self, points: [QPointF]):
+		if len(points) <= 3:
+			return points
 		half = len(points) // 2
 		left = points[:half]
 		right = points[:half]
