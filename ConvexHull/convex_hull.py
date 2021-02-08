@@ -19,6 +19,9 @@ BLUE = (0, 0, 255)
 PAUSE = 0.25
 
 
+# Global methods to use within the graphical aspects to make it easier to make polygons and lines
+
+# Slices a list to include items within a starting and ending point
 def circular_inclusive_slice(items, start, end):
     if start <= end:
         return items[start:end + 1]
@@ -26,13 +29,14 @@ def circular_inclusive_slice(items, start, end):
         return items[start:] + items[:end + 1]
 
 
+# Creates a polygon from QLineF's
 def polygon_to_qt_lines(polygon):
     return [QLineF(polygon[i], polygon[(i + 1) % len(polygon)]) for i in range(len(polygon))]
 
 
+# Creates a QLineF from a line
 def lines_to_qt_lines(lines):
     return [QLineF(*line) for line in lines]
-
 
 #
 # This is the class you have to complete.
@@ -143,6 +147,8 @@ class ConvexHullSolver(QObject):
 
         lower_L = left_index
         lower_R = right_index
+
+        # Shows tangent upon pausing
         if self.pause:
             self.blinkTangent([[leftHull[upper_L], rightHull[upper_R]], [leftHull[lower_L], rightHull[lower_R]]])
 
@@ -172,18 +178,21 @@ class ConvexHullSolver(QObject):
 
     # This is the method that gets called by the GUI and actually executes
     # the finding of the hull
-    def compute_hull(self, hull, pause, view):
+    def compute_hull(self, points, pause, view):
         self.pause = pause
         self.view = view
-        assert (type(hull) == list and type(hull[0]) == QPointF)
+        assert (type(points) == list and type(points[0]) == QPointF)
 
-        left_to_right = self.sortPoints(hull)
+        # Sorts the points left to right (ascending order) and saves the points
+        left_to_right = self.sortPoints(points)
 
         t3 = time.time()
-        hull = self.divide(left_to_right)
+
+        # Resaves the left_to_right as points after divide and conquering
+        points = self.divide(left_to_right)
         t4 = time.time()
 
         # when passing lines to the display, pass a list of QLineF objects.  Each QLineF
         # object can be created with two QPointF objects corresponding to the endpoints
-        self.showHull(hull, RED)
+        self.showHull(points, RED)
         self.showText('Time Elapsed (Convex Hull): {:3.3f} sec'.format(t4 - t3))
