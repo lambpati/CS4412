@@ -79,17 +79,6 @@ class ConvexHullSolver(QObject):
         sorted_points = sorted(points, key=lambda point: point.x())
         return sorted_points
 
-    # Checks which quadrant the points are in
-    def findQuad(self, point: QPointF):
-        if point.x() >= 0:
-            if point.y() >= 0:
-                return 1
-            return 4
-        if point.x() <= 0:
-            if point.y() <= 0:
-                return 3
-            return 2
-
     # Checks to see if 3rd point is crossing points a and b
     def isClockwise(self, a: QPointF, b: QPointF, c: QPointF):
         val = (b.y() - a.y()) * (c.x() - b.x()) - (c.y() - b.y()) * (b.x() - a.x())
