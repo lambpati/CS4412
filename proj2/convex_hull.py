@@ -57,22 +57,22 @@ class ConvexHullSolver(QObject):
 
 	# Sorts the points in ascending order
 	def sortPoints(self, points: [QPointF]):
-		sorted_points = sorted(points, key=lambda point: point.x())
+		sorted_points = sorted(points, key=lambda point: point.x()) # Python uses Timsort which runs in O(n log n)
 		return sorted_points
 
 	# Checks which quadrant the points are in
-	def findQuad(self, point: QPointF):
-		if point.x() >= 0:
-			if point.y() >= 0:
+	def findQuad(self, point: QPointF): # O(n)
+		if point.x() >= 0: # n
+			if point.y() >= 0: # 2n
 				return 1
 			return 4
-		if point.x() <= 0:
-			if point.y() <= 0:
+		if point.x() <= 0: # n
+			if point.y() <= 0: # 2n
 				return 3
 			return 2
 
 	# Checks to see if 3rd point is crossing points a and b
-	def isCrossing(self, a: QPointF, b: QPointF, c: QPointF):
+	def isCrossing(self, a: QPointF, b: QPointF, c: QPointF): # O(n)
 		val = (b.y() - a.y()) * (c.x() - b.x()) - (c.y() - b.y()) * (b.x() - a.x())
 		if (val == 0):
 			return 0
@@ -81,7 +81,7 @@ class ConvexHullSolver(QObject):
 		return -1
 
 	# Merging the two hulls by finding the upper and lower tangents
-	def conquer(self, leftHull: [QPointF], rightHull: [QPointF]):
+	def conquer(self, leftHull: [QPointF], rightHull: [QPointF]): # O(n)
 		leftSize = len(leftHull)
 		rightSize = len(rightHull)
 		iL = 0
@@ -128,7 +128,7 @@ class ConvexHullSolver(QObject):
 		lower_R = right_index
 
 	# Divides and conquers two hulls
-	def divide(self, points: [QPointF]):
+	def divide(self, points: [QPointF]): # O(n log n)
 		if len(points) <= 3:
 			return points
 		half = len(points) // 2
@@ -137,7 +137,7 @@ class ConvexHullSolver(QObject):
 		left_hull = self.divide(left)
 		right_hull = self.divide(right)
 
-		return self.conquer(left_hull, right_hull)
+		return self.conquer(left_hull, right_hull) # n
 
 	# This is the method that gets called by the GUI and actually executes
 	# the finding of the hull
