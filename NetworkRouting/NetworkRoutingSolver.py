@@ -39,7 +39,7 @@ class NetworkRoutingSolver:
         # TODO: RUN DIJKSTRA'S TO DETERMINE SHORTEST PATHS.
         #       ALSO, STORE THE RESULTS FOR THE SUBSEQUENT
         #       CALL TO getShortestPath(dest_index)
-        V = self.network.nodes
+        V = self.network.getNodes()
 
         self.prev = {}
         self.dist = {}
@@ -50,7 +50,7 @@ class NetworkRoutingSolver:
         else:
             priorityQ = Array(V)
 
-        for i in V:
+        for i in V.getNodes():
             self.dist[i.node_id] = sys.maxsize
             self.prev[i.node_id] = None
 

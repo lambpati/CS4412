@@ -3,7 +3,7 @@ class Heap:
 		self.array = []
 		self.size = 0
 		self.pos = []
-		for v in range(nodes):
+		for v in nodes:
 			nodes.array.append(nodes.newHeapNode(v, self.dist[v]))
 			nodes.pos.append(v)
 
