@@ -26,7 +26,7 @@ class Heap:
     def weight(self, i):
         return self.array[i][1]
 
-    # Heapify and update all nodes when they are swapped position O(|V|)
+    # Heapify and update all nodes when they are swapped position O(log |V|)
     def heapify(self):
         for i in reversed(range(self.size)):
             if self.weight(i) < self.weight(parent(i)):

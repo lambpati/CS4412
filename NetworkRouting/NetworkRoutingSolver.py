@@ -47,7 +47,7 @@ class NetworkRoutingSolver:
         if use_heap == True:
             priorityQ = Heap(V)
 
-        # Complexity using array: O(|V|)
+        # Complexity using array: O(|V|^2)
         else:
             priorityQ = Array(V)
 
